@@ -7,7 +7,10 @@ interface Params {
   billboardId?: string;
 }
 
-export async function GET(req: NextRequest, { params }: { params: Params }) {
+export async function GET(
+  req: NextRequest,
+  { params }: { params: Promise<Params> },
+) {
   try {
     const { billboardId } = await params;
 
@@ -28,7 +31,10 @@ export async function GET(req: NextRequest, { params }: { params: Params }) {
   }
 }
 
-export async function PATCH(req: NextRequest, { params }: { params: Params }) {
+export async function PATCH(
+  req: NextRequest,
+  { params }: { params: Promise<Params> },
+) {
   try {
     const { userId } = await auth();
 
@@ -79,7 +85,10 @@ export async function PATCH(req: NextRequest, { params }: { params: Params }) {
   }
 }
 
-export async function DELETE(req: NextRequest, { params }: { params: Params }) {
+export async function DELETE(
+  req: NextRequest,
+  { params }: { params: Promise<Params> },
+) {
   try {
     const { userId } = await auth();
     const { storeId, billboardId } = await params;

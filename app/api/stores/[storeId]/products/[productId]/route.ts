@@ -7,7 +7,10 @@ interface Params {
   productId?: string;
 }
 
-export async function GET(req: NextRequest, { params }: { params: Params }) {
+export async function GET(
+  req: NextRequest,
+  { params }: { params: Promise<Params> },
+) {
   try {
     const { productId } = await params;
 
@@ -37,7 +40,10 @@ export async function GET(req: NextRequest, { params }: { params: Params }) {
   }
 }
 
-export async function PATCH(req: NextRequest, { params }: { params: Params }) {
+export async function PATCH(
+  req: NextRequest,
+  { params }: { params: Promise<Params> },
+) {
   try {
     const { userId } = await auth();
 
@@ -134,7 +140,10 @@ export async function PATCH(req: NextRequest, { params }: { params: Params }) {
   }
 }
 
-export async function DELETE(req: NextRequest, { params }: { params: Params }) {
+export async function DELETE(
+  req: NextRequest,
+  { params }: { params: Promise<Params> },
+) {
   try {
     const { userId } = await auth();
     const { storeId, productId } = await params;

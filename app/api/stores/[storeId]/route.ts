@@ -6,7 +6,10 @@ interface Params {
   storeId: string;
 }
 
-export async function PATCH(req: NextRequest, { params }: { params: Params }) {
+export async function PATCH(
+  req: NextRequest,
+  { params }: { params: Promise<Params> },
+) {
   try {
     const { userId } = await auth();
 
@@ -29,7 +32,7 @@ export async function PATCH(req: NextRequest, { params }: { params: Params }) {
 
     const store = await prismadb.store.updateMany({
       where: {
-        id: params.storeId,
+        id: storeId,
         userId,
       },
       data: {
@@ -48,7 +51,10 @@ export async function PATCH(req: NextRequest, { params }: { params: Params }) {
   }
 }
 
-export async function DELETE(req: NextRequest, { params }: { params: Params }) {
+export async function DELETE(
+  req: NextRequest,
+  { params }: { params: Promise<Params> },
+) {
   try {
     const { userId } = await auth();
 
@@ -64,7 +70,7 @@ export async function DELETE(req: NextRequest, { params }: { params: Params }) {
 
     const store = await prismadb.store.deleteMany({
       where: {
-        id: params.storeId,
+        id: storeId,
         userId,
       },
     });

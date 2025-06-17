@@ -3,9 +3,13 @@ import { auth } from "@clerk/nextjs/server";
 
 import prismadb from "@/lib/prismadb";
 
+interface Params {
+  storeId: string;
+}
+
 export async function POST(
   req: Request,
-  { params }: { params: { storeId: string } },
+  { params }: { params: Promise<Params> },
 ) {
   try {
     const { userId } = await auth();
@@ -87,7 +91,7 @@ export async function POST(
 
 export async function GET(
   req: Request,
-  { params }: { params: { storeId: string } },
+  { params }: { params: Promise<Params> },
 ) {
   try {
     const { searchParams } = new URL(req.url);

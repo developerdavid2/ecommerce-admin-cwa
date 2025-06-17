@@ -4,10 +4,12 @@ import { format } from "date-fns";
 import { ColourColumn } from "@/app/(dashboard)/stores/[storeId]/(routes)/colours/components/column";
 import ColourClient from "@/app/(dashboard)/stores/[storeId]/(routes)/colours/components/colour-client";
 
-const ColoursSetupPage = async ({
+interface ColoursSetupPageProps {
+  params: Promise<{ storeId: string }>;
+}
+
+const ColoursSetupPage: React.FC<ColoursSetupPageProps> = async ({
   params,
-}: {
-  params: { storeId: string };
 }) => {
   const { storeId } = await params;
 
@@ -35,4 +37,5 @@ const ColoursSetupPage = async ({
     </div>
   );
 };
+
 export default ColoursSetupPage;

@@ -3,14 +3,15 @@ import prismadb from "@/lib/prismadb";
 import CategoryForm from "@/app/(dashboard)/stores/[storeId]/(routes)/categories/[categoryId]/components/category-form";
 
 interface CategoryPageProps {
-  params: {
+  params: Promise<{
     categoryId: string;
     storeId: string;
-  };
+  }>;
 }
 
 const CategoryPage: React.FC<CategoryPageProps> = async ({ params }) => {
   const { categoryId, storeId } = await params;
+
   const category = await prismadb.category.findUnique({
     where: {
       id: categoryId,
@@ -31,4 +32,5 @@ const CategoryPage: React.FC<CategoryPageProps> = async ({ params }) => {
     </div>
   );
 };
+
 export default CategoryPage;

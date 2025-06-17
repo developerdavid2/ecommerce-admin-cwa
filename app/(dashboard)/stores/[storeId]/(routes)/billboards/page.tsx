@@ -5,7 +5,7 @@ import { BillboardColumn } from "@/app/(dashboard)/stores/[storeId]/(routes)/bil
 import { format } from "date-fns";
 
 interface BillboardSetupPageProps {
-  params: Promise<Record<string, string>> | Record<string, string>;
+  params: Promise<{ storeId: string }>;
 }
 
 const BillboardsSetupPage: React.FC<BillboardSetupPageProps> = async ({
@@ -37,4 +37,5 @@ const BillboardsSetupPage: React.FC<BillboardSetupPageProps> = async ({
     </div>
   );
 };
+
 export default BillboardsSetupPage;

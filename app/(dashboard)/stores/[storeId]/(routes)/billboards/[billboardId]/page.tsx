@@ -3,15 +3,15 @@ import prismadb from "@/lib/prismadb";
 import BillboardForm from "@/app/(dashboard)/stores/[storeId]/(routes)/billboards/[billboardId]/components/billboard-form";
 
 interface BillboardPageProps {
-  params: {
+  params: Promise<{
     billboardId: string;
-  };
+    storeId: string;
+  }>;
 }
 
-const BillboardPage: React.FC<BillboardPageProps> = async ({
-  params,
-}: BillboardPageProps) => {
-  const { billboardId } = params;
+const BillboardPage: React.FC<BillboardPageProps> = async ({ params }) => {
+  const { billboardId } = await params;
+
   const billboard = await prismadb.billboard.findUnique({
     where: {
       id: billboardId,
@@ -26,4 +26,5 @@ const BillboardPage: React.FC<BillboardPageProps> = async ({
     </div>
   );
 };
+
 export default BillboardPage;

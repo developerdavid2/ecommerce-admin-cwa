@@ -3,14 +3,15 @@ import prismadb from "@/lib/prismadb";
 import ProductForm from "@/app/(dashboard)/stores/[storeId]/(routes)/products/[productId]/components/product-form";
 
 interface ProductPageProps {
-  params: {
+  params: Promise<{
     productId: string;
     storeId: string;
-  };
+  }>;
 }
 
 const ProductPage: React.FC<ProductPageProps> = async ({ params }) => {
   const { productId, storeId } = await params;
+
   const product = await prismadb.product.findUnique({
     where: {
       id: productId,
@@ -25,6 +26,7 @@ const ProductPage: React.FC<ProductPageProps> = async ({ params }) => {
       storeId,
     },
   });
+
   const sizes = await prismadb.size.findMany({
     where: {
       storeId,
@@ -50,4 +52,5 @@ const ProductPage: React.FC<ProductPageProps> = async ({ params }) => {
     </div>
   );
 };
+
 export default ProductPage;

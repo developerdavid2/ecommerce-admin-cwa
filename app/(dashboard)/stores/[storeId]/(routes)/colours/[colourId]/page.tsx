@@ -3,10 +3,10 @@ import prismadb from "@/lib/prismadb";
 import ColourForm from "@/app/(dashboard)/stores/[storeId]/(routes)/colours/[colourId]/components/colour-form";
 
 interface ColourPageProps {
-  params: {
+  params: Promise<{
     colourId: string;
     storeId: string;
-  };
+  }>;
 }
 
 const ColourPage: React.FC<ColourPageProps> = async ({ params }) => {

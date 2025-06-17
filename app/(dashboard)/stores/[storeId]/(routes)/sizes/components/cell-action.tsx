@@ -9,7 +9,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Copy, Edit, MoreHorizontal, Trash } from "lucide-react";
 import toast from "react-hot-toast";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import axios from "axios";
 import AlertModal from "@/components/modals/alert-modal";
 import { SizeColumn } from "@/app/(dashboard)/stores/[storeId]/(routes)/sizes/components/column";
@@ -24,7 +24,6 @@ interface CellActionProps {
 }
 
 const CellAction: React.FC<CellActionProps> = ({ data }) => {
-  const router = useRouter();
   const params = useParams();
   const [open, setOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);

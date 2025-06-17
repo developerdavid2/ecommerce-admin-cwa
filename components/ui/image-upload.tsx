@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 
 interface ImageUploadProps {
   disabled?: boolean;
-  onChange: (value: { url: string }[]) => void; // Expects the updated array
+  onChange: (value: { url: string }[]) => void;
   onRemove: (value: string) => void;
   value: { url: string }[];
 }
@@ -26,11 +26,10 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
     setIsMounted(true);
   }, []);
 
-  const onUpload = (result: any) => {
-    if (!result?.info?.secure_url) return;
-
-    // Always just pass the new image
-    onChange([{ url: result.info.secure_url }]);
+  const onUpload = (result: { info?: { secure_url?: string } | string }) => {
+    if (typeof result.info === "object" && result.info?.secure_url) {
+      onChange([{ url: result.info.secure_url }]);
+    }
   };
 
   if (!isMounted) {
@@ -70,8 +69,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
         onSuccess={onUpload}
         uploadPreset="ecommerce-image-upload"
         options={{
-          // For billboard-like components, set multiple to false
-          multiple: true, // Allow multiple file selection
+          multiple: true,
           maxFiles: 5,
         }}
       >

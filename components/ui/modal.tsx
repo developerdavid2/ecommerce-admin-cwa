@@ -28,7 +28,7 @@ export const Modal: React.FC<ModalProps> = ({
       onClose();
     }
   };
-  7;
+
   return (
     <Dialog open={isOpen} onOpenChange={onChange}>
       <DialogContent>

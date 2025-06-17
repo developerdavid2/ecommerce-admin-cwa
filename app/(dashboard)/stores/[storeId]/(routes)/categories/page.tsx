@@ -9,7 +9,7 @@ const CategoriesSetupPage = async ({
 }: {
   params: { storeId: string };
 }) => {
-  const { storeId } = await params;
+  const { storeId } = params;
 
   const categories = await prismadb.category.findMany({
     where: {
@@ -23,7 +23,7 @@ const CategoriesSetupPage = async ({
     },
   });
 
-  const formattedCategories: CategoryColumn[] = categories.map((item: any) => ({
+  const formattedCategories: CategoryColumn[] = categories.map((item) => ({
     id: item.id,
     name: item.name,
     billboardLabel: item.billboard.label,

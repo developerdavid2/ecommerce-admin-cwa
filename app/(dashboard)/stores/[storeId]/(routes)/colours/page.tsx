@@ -20,7 +20,7 @@ const ColoursSetupPage = async ({
     },
   });
 
-  const formattedColours: ColourColumn[] = colours.map((item: any) => ({
+  const formattedColours: ColourColumn[] = colours.map((item) => ({
     id: item.id,
     name: item.name,
     value: item.value,

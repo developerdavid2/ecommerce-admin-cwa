@@ -10,7 +10,7 @@ interface SizePageProps {
 }
 
 const SizePage: React.FC<SizePageProps> = async ({ params }) => {
-  const { sizeId } = await params;
+  const { sizeId } = params;
   const size = await prismadb.size.findUnique({
     where: {
       id: sizeId,

@@ -8,15 +8,19 @@ import {
   Tooltip,
   XAxis,
   YAxis,
+  TooltipProps,
 } from "recharts";
 
 interface OverviewProps {
-  data: any[];
+  data: { name: string; total: number }[];
 }
 
-// Custom glassmorphism tooltip component
-const GlassmorphismTooltip = ({ active, payload, label }: any) => {
-  if (active && payload && payload.length) {
+const GlassmorphismTooltip = ({
+  active,
+  payload,
+  label,
+}: TooltipProps<number, string>) => {
+  if (active && payload && payload.length && payload[0]?.value !== undefined) {
     return (
       <div
         className="p-3 rounded-xl shadow-xl border border-white/20"
@@ -63,7 +67,6 @@ export const Overview: React.FC<OverviewProps> = ({ data }) => {
           axisLine={false}
           tickFormatter={(value) => `$${value}`}
         />
-        {/* Tooltip with glassmorphism and cursor that fits bar width */}
         <Tooltip
           content={<GlassmorphismTooltip />}
           cursor={{

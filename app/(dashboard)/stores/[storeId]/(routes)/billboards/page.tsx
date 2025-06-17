@@ -1,30 +1,40 @@
 import React from "react";
+import BillboardClient from "@/app/(dashboard)/stores/[storeId]/(routes)/billboards/components/billboard-client";
 import prismadb from "@/lib/prismadb";
-import BillboardForm from "@/app/(dashboard)/stores/[storeId]/(routes)/billboards/[billboardId]/components/billboard-form";
+import { BillboardColumn } from "@/app/(dashboard)/stores/[storeId]/(routes)/billboards/components/column";
+import { format } from "date-fns";
 
-interface BillboardPageProps {
-  params: {
-    billboardId: string;
-    storeId: string;
-  };
+interface BillboardSetupPageProps {
+  params: Promise<Record<string, string>> | Record<string, string>;
 }
 
-const BillboardPage: React.FC<BillboardPageProps> = async ({ params }) => {
-  const { billboardId } = params;
+const BillboardsSetupPage: React.FC<BillboardSetupPageProps> = async ({
+  params,
+}) => {
+  const { storeId } = await params;
 
-  const billboard = await prismadb.billboard.findUnique({
+  const billboards = await prismadb.billboard.findMany({
     where: {
-      id: billboardId,
+      storeId,
+    },
+    orderBy: {
+      createdAt: "desc",
     },
   });
+
+  const formattedBillboards: BillboardColumn[] = billboards.map((item) => ({
+    id: item.id,
+    label: item.label,
+    imageUrl: item.imageUrl,
+    createdAt: format(item.createdAt, "MMMM do, yyyy"),
+  }));
 
   return (
     <div className="flex-col">
       <div className="flex-1 space-y-4 p-8 pt-6">
-        <BillboardForm initialData={billboard} />
+        <BillboardClient data={formattedBillboards} />
       </div>
     </div>
   );
 };
-
-export default BillboardPage;
+export default BillboardsSetupPage;

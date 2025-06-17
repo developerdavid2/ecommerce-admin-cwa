@@ -4,12 +4,12 @@ import prismadb from "@/lib/prismadb";
 import { CategoryColumn } from "@/app/(dashboard)/stores/[storeId]/(routes)/categories/components/column";
 import { format } from "date-fns";
 
-const CategoriesSetupPage = async ({
-  params,
-}: {
-  params: { storeId: string };
-}) => {
-  const { storeId } = params;
+interface CategoriesSetupPageProps {
+  params: Promise<{ storeId: string }>;
+}
+
+const CategoriesSetupPage = async ({ params }: CategoriesSetupPageProps) => {
+  const { storeId } = await params;
 
   const categories = await prismadb.category.findMany({
     where: {

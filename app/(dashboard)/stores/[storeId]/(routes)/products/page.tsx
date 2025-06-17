@@ -5,11 +5,11 @@ import { ProductColumn } from "@/app/(dashboard)/stores/[storeId]/(routes)/produ
 import { format } from "date-fns";
 import { priceFormatter } from "@/lib/utils";
 
-const ProductsSetupPage = async ({
-  params,
-}: {
-  params: { storeId: string };
-}) => {
+interface ProductsSetupPageProps {
+  params: Promise<{ storeId: string }>;
+}
+
+const ProductsSetupPage = async ({ params }: ProductsSetupPageProps) => {
   const { storeId } = await params;
 
   const products = await prismadb.product.findMany({

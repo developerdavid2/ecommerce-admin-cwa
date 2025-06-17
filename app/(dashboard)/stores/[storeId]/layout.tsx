@@ -5,7 +5,7 @@ import prismadb from "@/lib/prismadb";
 import Navbar from "@/components/navbar";
 
 interface StoreDashboardLayoutProps {
-  params: { storeId: string };
+  params: Promise<{ storeId: string }>;
   children: React.ReactNode;
 }
 

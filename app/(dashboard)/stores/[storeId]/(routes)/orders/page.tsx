@@ -5,7 +5,11 @@ import { priceFormatter } from "@/lib/utils";
 import { OrderColumn } from "@/app/(dashboard)/stores/[storeId]/(routes)/orders/components/column";
 import { OrderClient } from "@/app/(dashboard)/stores/[storeId]/(routes)/orders/components/order-client";
 
-const OrdersPage = async ({ params }: { params: { storeId: string } }) => {
+interface OrdersPageProps {
+  params: Promise<{ storeId: string }>;
+}
+
+const OrdersPage = async ({ params }: OrdersPageProps) => {
   const { storeId } = await params;
   const orders = await prismadb.order.findMany({
     where: {

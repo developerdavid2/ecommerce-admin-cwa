@@ -12,7 +12,7 @@ import { getStockCount } from "@/actions/get-stock-count";
 import { getGraphRevenue } from "@/actions/get-graph-revenue";
 
 interface StoreDashboardPageProps {
-  params: { storeId: string };
+  params: Promise<{ storeId: string }>;
 }
 
 const StoreDashboardPage: React.FC<StoreDashboardPageProps> = async ({

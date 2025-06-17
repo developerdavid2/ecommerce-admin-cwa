@@ -55,7 +55,7 @@ export async function POST(
 
 export async function GET(
   req: Request,
-  { params }: { params: { storeId: string } },
+  { params }: { params: Promise<Params> },
 ) {
   try {
     const { storeId } = await params;

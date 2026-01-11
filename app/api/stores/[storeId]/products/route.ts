@@ -9,7 +9,7 @@ interface Params {
 
 export async function POST(
   req: Request,
-  { params }: { params: Promise<Params> },
+  { params }: { params: Promise<Params> }
 ) {
   try {
     const { userId } = await auth();
@@ -91,7 +91,7 @@ export async function POST(
 
 export async function GET(
   req: Request,
-  { params }: { params: Promise<Params> },
+  { params }: { params: Promise<Params> }
 ) {
   try {
     const { searchParams } = new URL(req.url);

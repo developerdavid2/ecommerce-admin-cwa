@@ -65,7 +65,7 @@ const SizeForm: React.FC<SizeFormProps> = ({ initialData }) => {
         setIsUpdating(true);
         await axios.patch(
           `/api/stores/${params?.storeId}/sizes/${params.sizeId}`,
-          values,
+          values
         );
       } else {
         setIsCreating(true);
@@ -74,7 +74,7 @@ const SizeForm: React.FC<SizeFormProps> = ({ initialData }) => {
 
       router.refresh();
       router.push(`/stores/${params.storeId}/sizes`);
-      toast.success("Store deleted.");
+      toast.success(`${toastMessage}`);
     } catch (error) {
       console.log(error);
       toast.error("Something went wrong");
@@ -88,7 +88,7 @@ const SizeForm: React.FC<SizeFormProps> = ({ initialData }) => {
     try {
       setIsDeleting(true);
       await axios.delete(
-        `/api/stores/${params?.storeId}/sizes/${params.sizeId}`,
+        `/api/stores/${params?.storeId}/sizes/${params.sizeId}`
       );
       router.refresh();
       router.push(`/stores/${params.storeId}/sizes`);

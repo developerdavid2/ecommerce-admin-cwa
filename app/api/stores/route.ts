@@ -5,14 +5,14 @@ import prismadb from "@/lib/prismadb";
 
 export async function GET() {
   try {
-    const { userId } = await auth();
-    if (!userId) {
-      return new NextResponse("Unauthorized", { status: 401 });
-    }
-
     const stores = await prismadb.store.findMany({
-      where: { userId },
       orderBy: { createdAt: "desc" },
+      select: {
+        id: true,
+        name: true,
+        createdAt: true,
+        updatedAt: true,
+      },
     });
 
     return NextResponse.json(stores);

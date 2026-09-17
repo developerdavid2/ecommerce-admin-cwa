@@ -26,10 +26,10 @@ const StoreDashboardPage: React.FC<StoreDashboardPageProps> = async ({
 
   return (
     <div className="flex-col">
-      <div className="flex-1 p-8 pt-6 space-y-4">
+      <div className="flex-1 p-4 pt-6 sm:p-8 space-y-4 sm:space-y-6">
         <Heading title="Dashboard" description="Overview of your store" />
         <Separator />
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
               <CardTitle className="text-sm font-medium">
@@ -64,11 +64,11 @@ const StoreDashboardPage: React.FC<StoreDashboardPageProps> = async ({
             </CardContent>
           </Card>
         </div>
-        <Card className="col-span-4">
+        <Card>
           <CardHeader>
             <CardTitle>Overview</CardTitle>
           </CardHeader>
-          <CardContent className="pl-2">
+          <CardContent className="pl-0">
             <Overview data={graphRevenue} />
           </CardContent>
         </Card>
